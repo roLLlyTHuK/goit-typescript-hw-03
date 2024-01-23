@@ -1,23 +1,15 @@
 class Key {
-    private sign: number;
-  
-    constructor() {
-      this.sign = Math.random();
-      }
-  
+    private sign: number = Math.random();
+       
     getSignature(): number {
       return this.sign;
     }
   }
   
   class Person {
-    // private key: Key;
-    // protected name: string;
-    constructor(private key: Key, protected name: string) {
-      this.key = key;
-      this.name = name;
-    }
-  
+   
+    constructor(private key: Key, protected name: string) {} // name застосував для красивого виводу в консолі, бо [object Object] entered the house не дуже звучить)
+
     getKey(): Key {
       return this.key;
       
@@ -29,14 +21,10 @@ class Key {
   }
   
   abstract class House {
-    protected door: boolean;
-    protected key: Key;
+    protected door: boolean = false;
     protected tenants: Person[] = [];
   
-    constructor(key: Key) {
-      this.door = false;
-      this.key = key;
-    }
+    constructor(protected key: Key) {}
   
     abstract openDoor(key: Key): void;
   
