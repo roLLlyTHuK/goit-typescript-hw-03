@@ -1,24 +1,30 @@
 class Key {
-    private signature: number;
+    private sign: number;
   
     constructor() {
-      this.signature = Math.random();
-    }
+      this.sign = Math.random();
+      }
   
     getSignature(): number {
-      return this.signature;
+      return this.sign;
     }
   }
   
   class Person {
-    private key: Key;
-  
-    constructor(key: Key) {
+    // private key: Key;
+    // protected name: string;
+    constructor(private key: Key, protected name: string) {
       this.key = key;
+      this.name = name;
     }
   
     getKey(): Key {
       return this.key;
+      
+    }
+
+    getName(): string {
+       return this.name; 
     }
   }
   
@@ -37,7 +43,7 @@ class Key {
     comeIn(person: Person): void {
       if (this.door) {
         this.tenants.push(person);
-        console.log(`${person.getKey()} entered the house.`);
+        console.log(`${person.getName()} entered the house.`);
       } else {
         console.log('The door is closed.');
       }
@@ -54,14 +60,13 @@ class Key {
       }
     }
   }
-const key = new Key();
 
+
+const key = new Key();
 const house = new MyHouse(key);
-const person = new Person(key);
+const person = new Person(key, 'John');
 
 house.openDoor(person.getKey());
-
 house.comeIn(person);
-
 
 export {};
